@@ -32,11 +32,11 @@ const AddressApi = {
         })
     },
     //删除地址
-    deleteAddressApi(params) {
+    deleteAddressApi(id) {
         return axios({
             'url': '/addressBook',
             'method': 'delete',
-            params
+            params: { id }
         })
     },
     //查询单个地址

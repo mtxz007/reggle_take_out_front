@@ -27,9 +27,6 @@
           <div class="result">
             <span>共{{ order.sumNum }} 件商品,实付</span><span class="price">￥{{ order.amount }}</span>
           </div>
-          <div class="btn" v-if="order.status === 4">
-            <div class="btnAgain" @click="addOrderAgain(order)">再来一单</div>
-          </div>
         </van-cell>
       </van-list>
     </div>
@@ -125,10 +122,10 @@
             str =  '待付款'
             break;
           case 2:
-            str =  '正在派送'
+            str =  '正在制作'
             break;
           case 3:
-            str =  '已派送'
+            str =  '正在派送'
             break;
           case 4:
             str =  '已完成'

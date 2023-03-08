@@ -10,23 +10,6 @@
               <span @click="toUserPage">我的</span>
             </div>
         </div>
-<!--    <div class="divTitle">-->
-<!--      <div class="divStatic">-->
-<!--        <img src="../assets/images/logo.png" class="logo"/>-->
-<!--        <div class="divDesc">-->
-<!--          <div class="divName">菩提阁餐厅</div>-->
-<!--          <div class="divSend">-->
-<!--            <span><img src="../assets/images/time.png"/> 距离1.5km</span>-->
-<!--            <span><img src="../assets/images/money.png"/> 配送费6元</span>-->
-<!--            <span><img src="../assets/images/location.png"/> 预计时长12min</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="divDesc">-->
-<!--        简介: 菩提阁中餐厅是菩提阁点餐的独立的品牌，定位“大众 化的美食外送餐饮”，旨为顾客打造专业美食。-->
-<!--      </div>-->
-<!--    </div>-->
-
     <!-- 分割线 -->
     <van-divider/>
 
@@ -43,6 +26,7 @@
                               @click="categoryClick(index,item.id,item.type)"/>
           </van-sidebar>
         </van-col>
+
 
         <!-- 商品栏 设置18栅格 -->
         <van-col span="18">

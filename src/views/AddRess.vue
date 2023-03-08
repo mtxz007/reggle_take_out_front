@@ -12,7 +12,12 @@
           default-tag-text="默认"
           @add="toAddressCreatePage"
           @edit="toAddressEditPage"
-      />
+          @select="selectAddress"
+      >
+        <default v-if="isLayout">
+          <van-button type="primary" round block @click="selected">确认</van-button>
+        </default>
+      </van-address-list>
     </div>
   </div>
 </template>
@@ -26,7 +31,9 @@
       return {
         addressList:[], //后端返回的
         list:[],        //实际需要的
-        chosenAddressId:''  //当前选中的id
+        chosenAddressId:'',  //当前选中的id
+        beforeLayout:'',  //判断是从user进入的还是下单界面进入的
+        isLayout:false,   //判断是否显示确认按钮
       }
     },
     computed:{
@@ -34,12 +41,28 @@
     },
     created(){
       this.initData()
+      this.beforeLayout = this.$store.state.beforeLayout
     },
-    mounted(){},
+    mounted(){
+    },
+    // watch:{
+    //   '$route' (to, from) {
+    //     if (from.path === '/user') {
+    //       this.beforeLayout = 'user'
+    //     } else if (from.path === '/add-order') {
+    //       this.beforeLayout = 'addorder'
+    //     } else {
+    //       this.beforeLayout = ''
+    //     }
+    //   }
+    // },
     methods:{
       goBack(){
-        // history.go(-1)
-        this.$router.back()
+        if (this.beforeLayout === 'user'){
+          this.$router.push('/user')
+        } else {
+          this.$router.back()
+        }
       },
       toAddressEditPage(item,index){
         // window.requestAnimationFrame(()=>{
@@ -55,6 +78,19 @@
         // })
         this.$store.state.AddRessEditId = undefined
         this.$router.push('/address-edit')
+      },
+      selectAddress(){
+        if (this.beforeLayout === 'address') {
+            this.isLayout = true
+        }
+      },
+      async selected() {
+        const res = await AddressApi.setDefaultAddressApi({id:this.chosenAddressId})
+        if (res.data.code === 1) {
+          this.$router.back();
+        } else {
+          this.$message.error(res.data.msg)
+        }
       },
       async initData(){
         const res = await AddressApi.addressListApi()
@@ -87,17 +123,17 @@
           }
         }
       },
-      async setDefaultAddress(item){
-        if(item.id){
-          const res = await AddressApi.setDefaultAddressApi({id:item.id})
-          console.log('setDefault:',res)
-          if(res.data.code === 1){
-            this.initData()
-          }else{
-            this.$message.error(res.data.msg)
-          }
-        }
-      },
+      // async setDefaultAddress(item){
+      //   if(item.id){
+      //     const res = await AddressApi.setDefaultAddressApi({id:item.id})
+      //     console.log('setDefault:',res)
+      //     if(res.data.code === 1){
+      //       this.initData()
+      //     }else{
+      //       this.$message.error(res.data.msg)
+      //     }
+      //   }
+      // },
       itemClick(item){
         const url = document.referrer
         //表示是从订单页面跳转过来的

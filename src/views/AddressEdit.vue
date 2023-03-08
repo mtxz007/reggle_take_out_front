@@ -6,37 +6,6 @@
       </div>
     </div>
     <div class="divContent">
-<!--      <div class="divItem">-->
-<!--        <span>联系人：</span>-->
-<!--        <el-input placeholder=" 请填写收货人的姓名" v-model="form.consignee" maxlength='10' class="inputUser">-->
-<!--        </el-input>-->
-<!--        <span class="spanChecked" @click="form.sex = '1'">-->
-<!--                    <i :class="{iActive:form.sex === '1'}"></i>-->
-<!--                    先生-->
-<!--                   </span>-->
-<!--        <span class="spanChecked" @click="form.sex = '0'">-->
-<!--                    <i :class="{iActive:form.sex === '0'}"></i>-->
-<!--                    女士-->
-<!--                </span>-->
-<!--      </div>-->
-<!--      <div class="divItem">-->
-<!--        <span>手机号：</span>-->
-<!--        <el-input placeholder=" 请填写收货人手机号码" v-model="form.phone" maxlength='20'-->
-<!--                  style="width: calc(100% - 80px);">-->
-<!--        </el-input>-->
-<!--      </div>-->
-<!--      <div class="divItem">-->
-<!--        <span>收货地址：</span>-->
-<!--        <el-input placeholder=" 请输入收货地址" v-model="form.detail" maxlength='140'>-->
-<!--        </el-input>-->
-<!--      </div>-->
-<!--      <div class="divItem ">-->
-<!--        <span>标签：</span>-->
-<!--        <span v-for="(item,index) in labelList" :key="index" @click="form.label = item;activeIndex = index"-->
-<!--              :class="{spanItem:true,spanActiveSchool:activeIndex === index}">{{ item }}</span>-->
-<!--      </div>-->
-<!--      <div class="divSave" @click="saveAddress">保存地址</div>-->
-<!--      <div class="divDelete" @click="deleteAddress" v-if="id">删除地址</div>-->
       <van-address-edit
           show-delete
           show-set-default
@@ -149,7 +118,7 @@ export default {
         }
       },
       async deleteAddress() {
-        const res = await AddressApi.deleteAddressApi({id: this.id})
+        const res = await AddressApi.deleteAddressApi(this.id)
         console.log('删除地址：', res)
         if (res.data.code === 1) {
           // window.requestAnimationFrame(()=>{

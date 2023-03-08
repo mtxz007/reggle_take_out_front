@@ -8,12 +8,19 @@
     <div class="divContent">
       <div class="divAddress">
         <div @click="toAddressPage">
-          <div class="address">{{ address.detail }}</div>
-          <div class="name">
-            <span>{{ address.consignee }}{{ address.sex === '1' ? '先生' : '女士' }}</span>
-            <span>{{ address.phone }}</span>
+          <div v-if="address.detail === ''">
+            <div class="address">请选择地址</div>
+            <i class="el-icon-arrow-right"></i>
           </div>
-          <i class="el-icon-arrow-right"></i>
+          <div v-else>
+            <div class="address">{{ address.detail }}</div>
+            <div class="name">
+              <span>{{ address.consignee }} 用户</span>
+<!--              <span>{{ address.consignee }}{{ address.sex === '1' ? '先生' : '女士' }}</span>-->
+              <span>{{ address.phone }}</span>
+            </div>
+            <i class="el-icon-arrow-right"></i>
+          </div>
         </div>
         <div class="divSplit"></div>
       </div>
@@ -142,7 +149,7 @@
           // window.requestAnimationFrame(() => {
           //   window.location.href = '/front/page/address-edit.html'
           // })
-          this.$router.push('/address-edit')
+          // this.$router.push('/address-edit')
         }
       },
       //获取送达时间
@@ -159,9 +166,7 @@
         this.finishTime = hour + ':' + minute
       },
       toAddressPage() {
-        // window.requestAnimationFrame(() => {
-        //   window.location.href = '/front/page/address.html'
-        // })
+        this.$store.state.beforeLayout = 'address'
         this.$router.push('/address')
       },
       //获取购物车数据

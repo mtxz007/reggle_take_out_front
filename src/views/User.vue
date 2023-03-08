@@ -42,9 +42,6 @@
           <span>共{{ order[0].sumNum }} 件商品,实付</span>
           <span class="price">￥{{ order[0].amount }}</span>
         </div>
-        <div class="btn" v-if="order[0].status === 4">
-          <div class="btnAgain" @click="addOrderAgain">再来一单</div>
-        </div>
       </div>
       <div class="quitLogin" @click="toPageLogin">
         退出登录
@@ -87,13 +84,10 @@ export default {
   },
   methods: {
     goBack() {
-      // history.go(-1)
-      this.$router.back()
+      this.$router.push('/index')
     },
     toAddressPage() {
-      // window.requestAnimationFrame(()=>{
-      //   window.location.href = '/front/page/address.html'
-      // })
+      this.$store.state.beforeLayout = 'user'
       this.$router.push('/address')
     },
     toOrderPage() {
